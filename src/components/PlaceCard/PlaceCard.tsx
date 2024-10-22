@@ -10,9 +10,6 @@ export type PlaceCardProps = {
   name: string;
   type: PlaceType;
 };
-<<<<<<< Updated upstream
-type PlaceType = 'Apartment' | 'Room';
-=======
 
 type PlaceType = 'Apartment' | 'Room';
 
@@ -63,4 +60,3 @@ export const PlaceCard: React.FC<PlaceCardProps> = ({
     </div>
   </article>
 );
->>>>>>> Stashed changes
