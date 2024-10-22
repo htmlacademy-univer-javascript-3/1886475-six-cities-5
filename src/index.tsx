@@ -48,6 +48,7 @@ const places: PlaceCardProps[] = [
     type: 'Room',
   },
 ];
+
 root.render(
   <React.StrictMode>
     <App places={places}/>

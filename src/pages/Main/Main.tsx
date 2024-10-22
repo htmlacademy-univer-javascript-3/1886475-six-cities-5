@@ -1,9 +1,19 @@
 import React from 'react';
+<<<<<<< Updated upstream
 import {PlaceCardProps} from '../../components/PlaceCard/PlaceCard.tsx';
 type MainProps = {
   places: PlaceCardProps[];
 };
 export const Main: React.FC<MainProps> = () => (
+=======
+import {PlaceCard, PlaceCardProps} from '../../components/PlaceCard/PlaceCard.tsx';
+
+type MainProps = {
+  places: PlaceCardProps[];
+};
+
+export const Main: React.FC<MainProps> = ({places}) => (
+>>>>>>> Stashed changes
   <div className="page page--gray page--main">
     <header className="header">
       <div className="container">
@@ -33,6 +43,10 @@ export const Main: React.FC<MainProps> = () => (
         </div>
       </div>
     </header>
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
       <div className="tabs">
@@ -81,7 +95,11 @@ export const Main: React.FC<MainProps> = () => (
               <span className="places__sorting-type" tabIndex={0}>
                   Popular
                 <svg className="places__sorting-arrow" width="7" height="4">
+<<<<<<< Updated upstream
                   <use xlinkHref="#icon-arrow-select"></use>
+=======
+                  <use xlinkHref="#icon-arrow-select"/>
+>>>>>>> Stashed changes
                 </svg>
               </span>
               <ul className="places__options places__options--custom places__options--opened">
@@ -91,7 +109,13 @@ export const Main: React.FC<MainProps> = () => (
                 <li className="places__option" tabIndex={0}>Top rated first</li>
               </ul>
             </form>
+<<<<<<< Updated upstream
             {/* Карточки сюда*/}
+=======
+            <div className="cities__places-list places__list tabs__content">
+              { places.map((place) => (<PlaceCard key={place.name} {...place} />)) }
+            </div>
+>>>>>>> Stashed changes
           </section>
           <div className="cities__right-section">
             <section className="cities__map map"></section>
