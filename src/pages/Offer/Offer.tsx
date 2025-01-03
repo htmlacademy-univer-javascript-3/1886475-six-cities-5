@@ -1,44 +1,44 @@
-import {useCallback, useEffect, useState} from 'react';
-import {Navigate, useParams} from 'react-router-dom';
-import {ReviewsList} from '../../components/ReviewList/ReviewsList.tsx';
+import {useCallback, useEffect, useMemo} from 'react';
+import {Navigate, useNavigate, useParams} from 'react-router-dom';
+import {ReviewsList} from '../../components/review-list/review-list.tsx';
 import {Map} from '../../components/map/map.tsx';
-import {OfferList} from '../../components/OfferList/OfferList.tsx';
-import {LoadingStatus, ObjectClass, PlaceClassTypes} from '../../utils/const.ts';
-import {TPlaceCard, TReviewFormState} from '../../utils/types.ts';
+import {OfferList} from '../../components/offer-list/offer-list.tsx';
+import {Actions, AppRoute, LoadingStatus, ObjectClass, PlaceClassTypes} from '../../utils/const.ts';
+import {TReviewFormState} from '../../utils/types.ts';
 import {useAppDispatch, useAppSelector} from '../../store/hooks.ts';
 import {Header} from '../../components/header/header.tsx';
-import {createComment, fetchComments, fetchOffer, fetchOffersNearby} from '../../store/api-actions.ts';
-import {clearComments, clearNearbyOffers, clearOffer} from '../../store/action.ts';
+import {changeFavorite, createComment, fetchComments, fetchOffer, fetchOffersNearby} from '../../store/api-actions.ts';
+import {clearComments, clearNearbyOffers, clearOffer, setActiveOffer} from '../../store/action.ts';
 import {Spinner} from '../../components/spinner/spinner.tsx';
-import {Rating} from '../../components/Rating/Rating.tsx';
-import {ReviewForm} from '../../components/ReviewList/ReviewForm.tsx';
+import {Rating} from '../../components/rating/rating.tsx';
+import {ReviewForm} from '../../components/review-list/review-form.tsx';
 
 export const Offer = () => {
+  const navigate = useNavigate();
   const {id} = useParams();
   const dispatch = useAppDispatch();
 
-  const [selectedPlace, setSelectedPlace] = useState<TPlaceCard | undefined>(undefined);
+  const isAuthorized = useAppSelector((state) => state[Actions.User].authorizationStatus);
+  const city = useAppSelector((state) => state[Actions.City].city);
 
-  const isAuthorized = useAppSelector((state) => state.authorizationStatus);
-  const city = useAppSelector((state) => state.city);
+  const offer = useAppSelector((state) => state[Actions.Offer].offer);
+  const isOfferDataLoading = useAppSelector((state) => state[Actions.Offer].isOfferDataLoading);
 
-  const offer = useAppSelector((state) => state.offer);
-  const isOfferDataLoading = useAppSelector((state) => state.isOfferDataLoading);
+  const nearbyOffers = useAppSelector((state) => state[Actions.Offers].nearbyOffers);
+  const isOffersDataLoading = useAppSelector((state) => state[Actions.Offers].isOffersDataLoading);
 
-  const nearbyOffers = useAppSelector((state) => state.nearbyOffers);
-  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
-
-  const reviews = useAppSelector((state) => state.comments);
-  const isCommentsDataLoading = useAppSelector((state) => state.isCommentsDataLoading);
+  const reviews = useAppSelector((state) => state[Actions.Comments].comments);
+  const isCommentsDataLoading = useAppSelector((state) => state[Actions.Comments].isCommentsDataLoading);
 
   useEffect(() => {
     if (!id) {
       return;
     }
     dispatch(fetchOffer(id));
-
+    dispatch(setActiveOffer(id));
     return () => {
       dispatch(clearOffer());
+      dispatch(setActiveOffer(undefined));
     };
   }, [dispatch, id]);
 
@@ -55,12 +55,35 @@ export const Offer = () => {
     };
   }, [dispatch, id, offer]);
 
-  const handleListItemHover = (placeItemId: string | null) => {
-    const currentPlace = nearbyOffers.find((place) => place.id === placeItemId);
-    setSelectedPlace(currentPlace);
+  const sortedReviews = useMemo(() => [...reviews]
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, 10), [reviews]);
+
+  const markers = useMemo(() => {
+    if (!offer) {
+      return nearbyOffers.slice(0, 3);
+    }
+    return [...nearbyOffers.slice(0, 3), offer];
+  }, [offer, nearbyOffers]);
+
+  const handleFavoriteClick = () => {
+    if (!isAuthorized) {
+      navigate(AppRoute.Login);
+      return;
+    }
+    if (offer) {
+      dispatch(
+        changeFavorite({
+          offerId: offer?.id,
+          favoriteStatus: !offer?.isFavorite,
+        }),
+      ).then(() =>
+        dispatch(fetchOffer(offer?.id))
+      );
+    }
   };
 
-  const submitComment = useCallback((form: TReviewFormState) => {
+  const handleSubmitComment = useCallback((form: TReviewFormState) => {
     if (!form || !offer) {
       return;
     }
@@ -101,14 +124,16 @@ export const Offer = () => {
                   <h1 className="offer__name">
                     {offer.title}
                   </h1>
-                  {isAuthorized && (
-                    <button className="offer__bookmark-button button" type="button">
-                      <svg className="offer__bookmark-icon" width="31" height="33">
-                        <use xlinkHref="#icon-bookmark"/>
-                      </svg>
-                      <span className="visually-hidden">To bookmarks</span>
-                    </button>
-                  )}
+                  <button
+                    className={`offer__bookmark-button ${offer.isFavorite ? 'offer__bookmark-button--active' : ''} button`}
+                    type="button"
+                    onClick={handleFavoriteClick}
+                  >
+                    <svg className="offer__bookmark-icon" width="31" height="33">
+                      <use xlinkHref="#icon-bookmark"/>
+                    </svg>
+                    <span className="visually-hidden">To bookmarks</span>
+                  </button>
                 </div>
                 <Rating
                   rating={offer.rating}
@@ -165,13 +190,13 @@ export const Offer = () => {
                 {isCommentsDataLoading !== LoadingStatus.Success || !reviews ? (
                   <Spinner/>
                 ) : (
-                  <ReviewsList reviews={reviews}/>
+                  <ReviewsList reviews={sortedReviews}/>
                 )}
-                {isAuthorized && <ReviewForm onSubmit={submitComment}/>}
+                {isAuthorized && <ReviewForm onSubmit={handleSubmitComment}/>}
               </div>
             </div>
             <section className="offer__map map">
-              <Map city={city} places={nearbyOffers} selectedPlace={selectedPlace}/>
+              <Map city={city} places={markers}/>
             </section>
           </section>
         )}
@@ -183,8 +208,8 @@ export const Offer = () => {
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <div className="near-places__list places__list">
                 <OfferList
-                  offers={nearbyOffers}
-                  onListItemHover={handleListItemHover}
+                  offers={markers.slice(0, 3)}
+                  onListItemHover={() => {}}
                   listType={PlaceClassTypes.NearPlaces}
                 />
               </div>

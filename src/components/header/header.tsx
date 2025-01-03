@@ -1,5 +1,5 @@
 import {Link, useLocation} from 'react-router-dom';
-import {AppRoute} from '../../utils/const.ts';
+import {Actions, AppRoute} from '../../utils/const.ts';
 import {useAppDispatch, useAppSelector} from '../../store/hooks.ts';
 import {userLogout} from '../../store/api-actions.ts';
 
@@ -8,8 +8,9 @@ export const Header = () => {
   const isLoginPage = location.pathname === AppRoute.Login.toString();
 
   const dispatch = useAppDispatch();
-  const isAuthorized = useAppSelector((state) => state.authorizationStatus);
-  const userData = useAppSelector((state) => state.userData);
+  const isAuthorized = useAppSelector((state) => state[Actions.User].authorizationStatus);
+  const userData = useAppSelector((state) => state[Actions.User].userData);
+  const favoritesLength = useAppSelector((state) => state[Actions.Favorites].favorites).length;
 
   const handleLogout = () => {
     dispatch(userLogout());
@@ -40,7 +41,7 @@ export const Header = () => {
                         <span className="header__user-name user__name">
                           {userData?.name}
                         </span>
-                        <span className="header__favorite-count">fav_count</span>
+                        <span className="header__favorite-count">{favoritesLength}</span>
                       </Link>
                     </li>
                     <li className="header__nav-item">
