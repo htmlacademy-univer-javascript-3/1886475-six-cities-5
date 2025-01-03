@@ -5,7 +5,7 @@ import {PlaceClassTypes} from '../../utils/const.ts';
 
 interface IOfferListProps {
   offers: TPlaceCard[];
-  onListItemHover: (listItemName: string | null) => void;
+  onListItemHover: (listItemName: string | undefined) => void;
   listType: PlaceClassTypes;
 }
 
@@ -14,6 +14,7 @@ export const OfferList: React.FC<IOfferListProps> = ({offers, onListItemHover, l
     `${listType === PlaceClassTypes.Cities ? 'cities__places-list' : 'near-places__list'} places__list
     ${listType === PlaceClassTypes.Cities ? 'tabs__content' : null}`
   }
+  data-testid="offer-list-container"
   >
     {offers.map((place) => (
       <PlaceCard
@@ -21,7 +22,7 @@ export const OfferList: React.FC<IOfferListProps> = ({offers, onListItemHover, l
         place={place}
         placeCardType={listType}
         onMouseOver={() => onListItemHover(place.id)}
-        onMouseLeave={() => onListItemHover(null)}
+        onMouseLeave={() => onListItemHover(undefined)}
       />))}
   </div>
 );
