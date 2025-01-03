@@ -1,4 +1,4 @@
-import {userReducer} from './userReducer';
+import {userReducer} from './user-reducer.ts';
 import {clearUserData, setAuthorizationStatus, setUserData} from '../action';
 import {TUserFull} from '../../utils/types';
 

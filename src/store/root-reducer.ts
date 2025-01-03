@@ -1,11 +1,11 @@
 import {combineReducers} from '@reduxjs/toolkit';
-import {userReducer} from './reducers/userReducer.ts';
-import {cityReducer} from './reducers/cityReducer.ts';
-import {offersReducer} from './reducers/offersReducer.ts';
-import {offerReducer} from './reducers/offerReducer.ts';
-import {commentsReducer} from './reducers/commentsReducer.ts';
+import {userReducer} from './reducers/user-reducer.ts';
+import {cityReducer} from './reducers/city-reducer.ts';
+import {offersReducer} from './reducers/offers-reducer.ts';
+import {offerReducer} from './reducers/offer-reducer.ts';
+import {commentsReducer} from './reducers/comments-reducer.ts';
 import {Actions} from '../utils/const.ts';
-import {favoritesReducer} from './reducers/favoritesReducer.ts';
+import {favoritesReducer} from './reducers/favorites-reducer.ts';
 
 
 const rootReducer = combineReducers({

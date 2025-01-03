@@ -1,11 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import { vi } from 'vitest';
-import { CityList } from './CityList';
+import { CityList } from './city-list.tsx';
 import { CITIES } from '../../utils/const';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { changeCity } from '../../store/action';
 
-// Мокаем хуки Redux
 vi.mock('../../store/hooks', () => ({
   useAppDispatch: vi.fn(),
   useAppSelector: vi.fn(),

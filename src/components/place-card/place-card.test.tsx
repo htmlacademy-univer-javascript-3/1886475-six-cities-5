@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { vi } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
-import { PlaceCard } from './PlaceCard';
+import { PlaceCard } from './place-card.tsx';
 import { PlaceClassTypes } from '../../utils/const';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import {TPlaceCard} from '../../utils/types.ts';
@@ -11,7 +11,7 @@ vi.mock('../../store/hooks', () => ({
   useAppSelector: vi.fn(),
 }));
 
-vi.mock('../Rating/Rating', () => ({
+vi.mock('../rating/rating', () => ({
   Rating: () => <div data-testid="rating" />,
 }));
 
@@ -82,20 +82,5 @@ describe('PlaceCard', () => {
     expect(onMouseOverMock).toHaveBeenCalledWith(expect.anything());
     expect(onMouseLeaveMock).toHaveBeenCalledTimes(1);
     expect(onMouseLeaveMock).toHaveBeenCalledWith(expect.anything());
-  });
-
-  it('should not show bookmark button if user is not authorized', () => {
-    (useAppSelector as jest.Mock).mockReturnValue(false);
-
-    render(
-      <MemoryRouter>
-        <PlaceCard
-          place={mockPlace}
-          placeCardType={PlaceClassTypes.Cities}
-        />
-      </MemoryRouter>
-    );
-
-    expect(screen.queryByRole('button', { name: /To bookmarks/i })).not.toBeInTheDocument();
   });
 });

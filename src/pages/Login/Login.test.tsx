@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { vi } from 'vitest';
-import { Login } from './Login';
+import { Login } from './login.tsx';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { userLogin } from '../../store/api-actions';
 import { AppRoute } from '../../utils/const';
@@ -15,7 +15,7 @@ vi.mock('../../store/api-actions', () => ({
   userLogin: vi.fn(),
 }));
 
-describe('Component: Login', () => {
+describe('Component: login', () => {
   const mockDispatch = vi.fn();
 
   beforeEach(() => {

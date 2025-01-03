@@ -1,6 +1,6 @@
 import {render, screen} from '@testing-library/react';
 import {MemoryRouter} from 'react-router-dom';
-import {NotFound} from './NotFound';
+import {NotFound} from './not-found-page.tsx';
 import {AppRoute} from '../../utils/const';
 import {Provider} from 'react-redux';
 import {initAsyncActionsStore, mockState} from '../../utils/mocks.tsx';

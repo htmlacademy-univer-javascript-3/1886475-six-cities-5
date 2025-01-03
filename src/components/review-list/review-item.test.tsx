@@ -1,10 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import { vi } from 'vitest';
-import { ReviewItem } from './ReviewItem';
+import { ReviewItem } from './review-item.tsx';
 import { TReview } from '../../utils/types';
 import * as dateUtils from '../../utils/date';
 
-vi.mock('../Rating/Rating', () => ({
+vi.mock('../rating/rating', () => ({
   Rating: () => <div data-testid="rating" />,
 }));
 

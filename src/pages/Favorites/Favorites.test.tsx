@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { vi } from 'vitest';
 import { Provider } from 'react-redux';
-import { Favorites } from './Favorites';
+import { Favorites } from './favorites.tsx';
 import { AppRoute, Actions, LoadingStatus } from '../../utils/const';
 import {initAsyncActionsStore, mockState} from '../../utils/mocks.tsx';
 
@@ -10,13 +10,13 @@ vi.mock('../../components/header/header', () => ({
   Header: () => <div data-testid="header">Header</div>,
 }));
 
-vi.mock('../../components/city-offers-list/CityOffersList', () => ({
+vi.mock('../../components/city-offers-list/city-offers-list', () => ({
   CityOffersList: () => <div data-testid="city-offers-list">CityOffersList</div>,
 }));
 
 const {mockStoreCreator} = initAsyncActionsStore();
 
-describe('Component: Favorites', () => {
+describe('Component: favorites', () => {
   it('should render empty state when there are no favorites', () => {
     const mockStateFavorites = {
       [Actions.Favorites]: {
@@ -47,7 +47,7 @@ describe('Component: Favorites', () => {
     mockStateCopy[Actions.Favorites].favorites = [
       {
         id: '1',
-        title: 'Test Offer',
+        title: 'Test offer',
         type: 'apartment',
         price: 100,
         isFavorite: false,

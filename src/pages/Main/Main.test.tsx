@@ -1,7 +1,7 @@
 import {render, screen} from '@testing-library/react';
 import {MemoryRouter} from 'react-router-dom';
 import {vi} from 'vitest';
-import {Main} from './Main';
+import {Main} from './main.tsx';
 import {useAppDispatch, useAppSelector} from '../../store/hooks';
 import {mockState} from '../../utils/mocks.tsx';
 import {Actions, LoadingStatus} from '../../utils/const.ts';
@@ -15,15 +15,15 @@ vi.mock('../../components/header/header', () => ({
   Header: () => <div data-testid="header">Header</div>,
 }));
 
-vi.mock('../../components/city-list/CityList', () => ({
+vi.mock('../../components/city-list/city-list', () => ({
   CityList: () => <div data-testid="city-list">CityList</div>,
 }));
 
-vi.mock('../../components/sort-filter/SortFilter', () => ({
+vi.mock('../../components/sort-filter/sort-filter', () => ({
   SortFilter: () => <div data-testid="sort-filter">SortFilter</div>,
 }));
 
-vi.mock('../../components/OfferList/OfferList', () => ({
+vi.mock('../../components/offer-list/offer-list', () => ({
   OfferList: () => <div data-testid="offer-list">OfferList</div>,
 }));
 
@@ -35,7 +35,7 @@ vi.mock('../../components/spinner/spinner', () => ({
   Spinner: () => <div data-testid="spinner">Spinner</div>,
 }));
 
-describe('Component: Main', () => {
+describe('Component: main', () => {
   const mockDispatch = vi.fn();
 
   beforeEach(() => {

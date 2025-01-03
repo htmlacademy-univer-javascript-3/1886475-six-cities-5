@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { Rating } from './Rating';
+import { Rating } from './rating.tsx';
 import { ObjectClass } from '../../utils/const';
 
 describe('Rating', () => {

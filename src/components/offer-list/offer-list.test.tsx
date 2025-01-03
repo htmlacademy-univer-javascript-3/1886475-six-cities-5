@@ -1,7 +1,7 @@
 import {MouseEventHandler} from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { vi } from 'vitest';
-import { OfferList } from './OfferList';
+import { OfferList } from './offer-list.tsx';
 import { PlaceClassTypes } from '../../utils/const';
 import {TPlaceCard} from '../../utils/types.ts';
 
@@ -11,7 +11,7 @@ interface IPlaceCardProps {
   onMouseLeave?: MouseEventHandler;
 }
 
-vi.mock('../PlaceCard/PlaceCard', () => ({
+vi.mock('../place-card/place-card', () => ({
   PlaceCard: ({ place, onMouseOver, onMouseLeave }: IPlaceCardProps) => (
     <div
       data-testid="place-card"

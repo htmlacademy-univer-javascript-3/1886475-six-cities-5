@@ -1,4 +1,4 @@
-import {cityReducer} from './cityReducer';
+import {cityReducer} from './city-reducer.ts';
 import {changeCity} from '../action';
 import {TCity} from '../../utils/types';
 import {CITIES} from '../../utils/const.ts';

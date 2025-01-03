@@ -1,4 +1,4 @@
-import {favoritesReducer} from './favoritesReducer';
+import {favoritesReducer} from './favorites-reducer.ts';
 import {setFavorites, setFavoritesLoadingStatus} from '../action';
 import {LoadingStatus} from '../../utils/const';
 import {TPlaceCard} from '../../utils/types';

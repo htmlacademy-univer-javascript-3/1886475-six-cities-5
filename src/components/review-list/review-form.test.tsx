@@ -1,12 +1,12 @@
 import { render, screen } from '@testing-library/react';
 import { vi } from 'vitest';
-import { ReviewForm } from './ReviewForm';
+import { ReviewForm } from './review-form.tsx';
 
 type IReviewRatingProps = {
   onChange: (field: string, value: number) => void;
 };
 
-vi.mock('../Rating/ReviewRating', () => ({
+vi.mock('../rating/ReviewRating', () => ({
   ReviewRating: ({ onChange }: IReviewRatingProps) => (
     <div data-testid="rating">
       <button onClick={() => onChange('rating', 5)}>Set Rating</button>

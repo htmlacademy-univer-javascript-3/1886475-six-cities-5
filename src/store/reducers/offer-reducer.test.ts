@@ -1,4 +1,4 @@
-import {offerReducer} from './offerReducer';
+import {offerReducer} from './offer-reducer.ts';
 import {setActiveOffer, clearOffer, setOffer} from '../action';
 import {TPlaceCardFull} from '../../utils/types';
 import {LoadingStatus} from '../../utils/const.ts';
@@ -10,7 +10,7 @@ describe('offerReducer', () => {
 
   const testOffer: TPlaceCardFull = {
     id: '1',
-    title: 'Test Offer',
+    title: 'Test offer',
     type: 'apartment',
     price: 150,
     previewImage: '/img/test.jpg',
@@ -55,7 +55,7 @@ describe('offerReducer', () => {
   it('should handle loadOffer action', () => {
     const offer: TPlaceCardFull = {
       id: '1',
-      title: 'Test Offer',
+      title: 'Test offer',
       type: 'apartment',
       price: 150,
       previewImage: '/img/test.jpg',

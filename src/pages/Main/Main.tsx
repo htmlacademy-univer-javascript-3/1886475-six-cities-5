@@ -1,22 +1,22 @@
 import {useMemo, useState} from 'react';
-import {OfferList} from '../../components/OfferList/OfferList.tsx';
+import {OfferList} from '../../components/offer-list/offer-list.tsx';
 import {Map} from '../../components/map/map.tsx';
 import {Actions, LoadingStatus, PlaceClassTypes, SortName} from '../../utils/const.ts';
-import {CityList} from '../../components/city-list/CityList.tsx';
+import {CityList} from '../../components/city-list/city-list.tsx';
 import {useAppDispatch, useAppSelector} from '../../store/hooks.ts';
-import {SortFilter} from '../../components/sort-filter/SortFilter.tsx';
+import {SortFilter} from '../../components/sort-filter/sort-filter.tsx';
 import {Spinner} from '../../components/spinner/spinner.tsx';
 import {Header} from '../../components/header/header.tsx';
 import {setActiveOffer} from '../../store/action.ts';
 
 export const Main = () => {
   const dispatch = useAppDispatch();
-  const [currentFilter, setCurrentFilter] = useState<SortName>(SortName.Popular);
   const currentCity = useAppSelector((state) => state[Actions.City].city);
   const currentOffers = useAppSelector((state) => state[Actions.Offers].offers);
   const isLoading = useAppSelector((state) => state[Actions.Offers].isOffersDataLoading);
-
   const selectedPlaceId = useAppSelector((state) => state[Actions.Offer].activeOffer);
+
+  const [currentFilter, setCurrentFilter] = useState<SortName>(SortName.Popular);
 
   const handleListItemHover = (placeItemId: string | undefined) => {
     if (selectedPlaceId !== placeItemId) {
@@ -24,7 +24,7 @@ export const Main = () => {
     }
   };
 
-  const onFilterChange = (filter: SortName) => {
+  const handleFilterChange = (filter: SortName) => {
     setCurrentFilter(filter);
   };
 
@@ -74,7 +74,7 @@ export const Main = () => {
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found">{sortedOffers?.length} places to stay in {currentCity.name}</b>
-                <SortFilter currentFilter={currentFilter} onFilterChange={onFilterChange}/>
+                <SortFilter currentFilter={currentFilter} onFilterChange={handleFilterChange}/>
                 {isLoading !== LoadingStatus.Success
                   ?
                   <Spinner/>

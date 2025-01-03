@@ -1,13 +1,13 @@
 import { render, screen } from '@testing-library/react';
 import { vi } from 'vitest';
-import { ReviewsList } from './ReviewsList';
+import { ReviewsList } from './review-list.tsx';
 import { TReview } from '../../utils/types';
 
 interface IReviewItemProps {
   review: TReview;
 }
 
-vi.mock('./ReviewItem', () => ({
+vi.mock('./review-item', () => ({
   ReviewItem: ({ review }: IReviewItemProps) => (
     <li data-testid="review-item">
       {review.comment}

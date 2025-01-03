@@ -1,4 +1,4 @@
-import {commentsReducer} from './commentsReducer';
+import {commentsReducer} from './comments-reducer.ts';
 import {clearComments, setComments, setCommentsLoadingStatus} from '../action';
 import {LoadingStatus} from '../../utils/const';
 import {TReview} from '../../utils/types';
