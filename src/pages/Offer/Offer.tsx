@@ -1,3 +1,5 @@
+import {ReviewForm} from '../../components/Comment/ReviewForm.tsx';
+
 export const Offer = () => (
   <div className="page">
     <header className="header">
@@ -60,7 +62,7 @@ export const Offer = () => (
             </div>
             <div className="offer__name-wrapper">
               <h1 className="offer__name">
-                  Beautiful &amp; luxurious studio at great location
+                Beautiful &amp; luxurious studio at great location
               </h1>
               <button className="offer__bookmark-button button" type="button">
                 <svg className="offer__bookmark-icon" width="31" height="33">
@@ -78,13 +80,13 @@ export const Offer = () => (
             </div>
             <ul className="offer__features">
               <li className="offer__feature offer__feature--entire">
-                  Apartment
+                Apartment
               </li>
               <li className="offer__feature offer__feature--bedrooms">
-                  3 Bedrooms
+                3 Bedrooms
               </li>
               <li className="offer__feature offer__feature--adults">
-                  Max 4 adults
+                Max 4 adults
               </li>
             </ul>
             <div className="offer__price">
@@ -95,34 +97,34 @@ export const Offer = () => (
               <h2 className="offer__inside-title">What&apos;s inside</h2>
               <ul className="offer__inside-list">
                 <li className="offer__inside-item">
-                    Wi-Fi
+                  Wi-Fi
                 </li>
                 <li className="offer__inside-item">
-                    Washing machine
+                  Washing machine
                 </li>
                 <li className="offer__inside-item">
-                    Towels
+                  Towels
                 </li>
                 <li className="offer__inside-item">
-                    Heating
+                  Heating
                 </li>
                 <li className="offer__inside-item">
-                    Coffee machine
+                  Coffee machine
                 </li>
                 <li className="offer__inside-item">
-                    Baby seat
+                  Baby seat
                 </li>
                 <li className="offer__inside-item">
-                    Kitchen
+                  Kitchen
                 </li>
                 <li className="offer__inside-item">
-                    Dishwasher
+                  Dishwasher
                 </li>
                 <li className="offer__inside-item">
-                    Cabel TV
+                  Cabel TV
                 </li>
                 <li className="offer__inside-item">
-                    Fridge
+                  Fridge
                 </li>
               </ul>
             </div>
@@ -135,20 +137,20 @@ export const Offer = () => (
                   />
                 </div>
                 <span className="offer__user-name">
-                      Angelina
+                    Angelina
                 </span>
                 <span className="offer__user-status">
-                      Pro
+                    Pro
                 </span>
               </div>
               <div className="offer__description">
                 <p className="offer__text">
-                    A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The
-                    building is green and from 18th century.
+                  A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The
+                  building is green and from 18th century.
                 </p>
                 <p className="offer__text">
-                    An independent House, strategically located between Rembrand Square and National Opera, but where the
-                    bustle of the city comes to rest in this alley flowery and colorful.
+                  An independent House, strategically located between Rembrand Square and National Opera, but where the
+                  bustle of the city comes to rest in this alley flowery and colorful.
                 </p>
               </div>
             </div>
@@ -163,7 +165,7 @@ export const Offer = () => (
                       />
                     </div>
                     <span className="reviews__user-name">
-                          Max
+                        Max
                     </span>
                   </div>
                   <div className="reviews__info">
@@ -174,73 +176,14 @@ export const Offer = () => (
                       </div>
                     </div>
                     <p className="reviews__text">
-                        A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The
-                        building is green and from 18th century.
+                      A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The
+                      building is green and from 18th century.
                     </p>
                     <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
                   </div>
                 </li>
               </ul>
-              <form className="reviews__form form" action="#" method="post">
-                <label className="reviews__label form__label" htmlFor="review">Your review</label>
-                <div className="reviews__rating-form form__rating">
-                  <input className="form__rating-input visually-hidden" name="rating" value="5" id="5-stars"
-                    type="radio"
-                  />
-                  <label htmlFor="5-stars" className="reviews__rating-label form__rating-label" title="perfect">
-                    <svg className="form__star-image" width="37" height="33">
-                      <use xlinkHref="#icon-star"/>
-                    </svg>
-                  </label>
-
-                  <input className="form__rating-input visually-hidden" name="rating" value="4" id="4-stars"
-                    type="radio"
-                  />
-                  <label htmlFor="4-stars" className="reviews__rating-label form__rating-label" title="good">
-                    <svg className="form__star-image" width="37" height="33">
-                      <use xlinkHref="#icon-star"/>
-                    </svg>
-                  </label>
-
-                  <input className="form__rating-input visually-hidden" name="rating" value="3" id="3-stars"
-                    type="radio"
-                  />
-                  <label htmlFor="3-stars" className="reviews__rating-label form__rating-label" title="not bad">
-                    <svg className="form__star-image" width="37" height="33">
-                      <use xlinkHref="#icon-star"/>
-                    </svg>
-                  </label>
-
-                  <input className="form__rating-input visually-hidden" name="rating" value="2" id="2-stars"
-                    type="radio"
-                  />
-                  <label htmlFor="2-stars" className="reviews__rating-label form__rating-label" title="badly">
-                    <svg className="form__star-image" width="37" height="33">
-                      <use xlinkHref="#icon-star"/>
-                    </svg>
-                  </label>
-
-                  <input className="form__rating-input visually-hidden" name="rating" value="1" id="1-star"
-                    type="radio"
-                  />
-                  <label htmlFor="1-star" className="reviews__rating-label form__rating-label" title="terribly">
-                    <svg className="form__star-image" width="37" height="33">
-                      <use xlinkHref="#icon-star"/>
-                    </svg>
-                  </label>
-                </div>
-                <textarea className="reviews__textarea form__textarea" id="review" name="review"
-                  placeholder="Tell how was your stay, what you like and what can be improved"
-                >
-                </textarea>
-                <div className="reviews__button-wrapper">
-                  <p className="reviews__help">
-                      To submit review please make sure to set <span className="reviews__star">rating</span> and describe
-                      your stay with at least <b className="reviews__text-amount">50 characters</b>.
-                  </p>
-                  <button className="reviews__submit form__submit button" type="submit" disabled>Submit</button>
-                </div>
-              </form>
+              <ReviewForm />
             </section>
           </div>
         </div>
